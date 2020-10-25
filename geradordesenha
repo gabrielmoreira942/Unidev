@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include<stdlib.h> //srand, rand
+#include <time.h> //time
+#include<string.h>
+#include<locale.h>
+	void var_random(){ //variavel para randomizar
+
+setlocale(LC_ALL, "Portuguese");
+	int i=0,aux, aux2,aux3,j=0,k=0; // contador e auxiliar. //i = quantidade de numeros/chars para randomizar
+	int ts; // tamanho da senha
+	char tc[29]; //tipo de senha
+	char RC[50], rc[50],rcc[50]; //random char
+    char alfa[200];
+	srand(time(NULL)); //semente rand para gerar numeros aleatórios
+	printf("Tamanho da senha: ");
+	 
+	scanf("%d", &ts);
+	 	 printf("\n");
+	 	 while(ts<3||ts>30){
+	 	 	printf("Quantidade invalida. Digite um numero maior que 2 e menor que 30: ");
+	 	 	scanf("%d", &ts);
+	 	 	 printf("\n");
+
+		  }
+		 printf("Tipo da senha: ");	
+		  
+		scanf(" %[^\n]s", tc);// o espaço após aspas é para limpar o buffer, o [^\n] força a string a ter espaço.
+	 	printf("\n");
+	 	printf("Senha gerada: ");
+	 	
+	 
+    	while (i<ts) //o  i vai ser a quantidade de char/numeros que vão ser randomizados.
+      {
+      	
+      	/******PARA SENHA FORTE!!!******/
+      	if((strcmp(tc, "senha forte")==0)){
+      aux = (33 + rand()%(127-33));
+      RC[i]=(char) aux; // RC de i = transforma em char, auxiliar ascii de 33 ate 126 de forma randomica.
+      printf("%c",RC[i]);
+      i++;
+  }
+  
+  		/******PARA SENHA NUMÉRICA!!******/
+  	else if((strcmp(tc, "numerica")==0)){
+  		aux = (48+ rand()%(58-48));
+  		RC[i]= aux;
+  		printf("%c",RC[i]);
+		i++;	
+	  }      
+      /******PARA SENHA ALFANUMERICA!!!******/
+	else if((strcmp(tc, "alfanumerica")==0)){
+		
+	j=i++;
+	k=i++;
+	aux = (48+rand()%(58-48));
+	RC[i]=(char) aux;
+	
+	if(j < ts - 1){
+		aux2=(65+rand()%(91-65));
+		rc[i]=(char)aux2;		
+	}
+	if(k< ts - 1){
+			aux3=(97+rand()%(123-97));
+		rcc[i]= (char)aux3;
+	}
+	printf("%c%c%c",RC[i],rc[i],rcc[i]);
+		i++;	
+}
+	
+	else if(!(strcmp(tc, "senha forte"))||(strcmp(tc, "numerica"))||(strcmp(tc, "alfanumerica"))){
+	
+			printf("Inválida.\n\n");
+			printf("Digite o tipo da senha corretamente.\n\n");
+			var_random();
+			break;
+		}	
+	}
+}
+	int main(){
+		
+    //main
+    printf("\t\t*****Gerador de senhas*****\n\n");
+    var_random();     
+		 	printf("\n");
+
+return 0;
+} 
